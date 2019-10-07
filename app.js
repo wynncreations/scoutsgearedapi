@@ -31,9 +31,6 @@ mongoose.connect(
     }
 );
 
-if (process.env.ENV === "production") {
-    app.use(history());
-}
 
 const port = process.env.PORT || 8001;
 
@@ -53,11 +50,6 @@ app.use('/unit', unit);
 app.use('/kid', kid);
 app.use('/scout', scout);
 app.use('/dens', dens);
-
-if (process.env.ENV === "production") {
-    app.use(express.static(path.join(__dirname, "dist")));
-    console.log(path.join(__dirname, "dist"));
-}
 
 
 // create the server
