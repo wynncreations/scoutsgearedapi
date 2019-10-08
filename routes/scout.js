@@ -3,6 +3,11 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const Kid = require('../models/kids');
 
+router.get('',(req,res,next)=>{
+    res.send(`Please request with a scout id.`);
+});
+
+
 //return a single scout with no additional data attached
 router.get('/:id', (req, res, next) => {
     Kid
