@@ -52,6 +52,11 @@ app.use('/scout', scout);
 app.use('/dens', dens);
 
 
+app.get('/',(req,res,next)=>{
+    res.send(req.ip);
+});
+
+
 // create the server
 app.listen(port, () => {
     console.log(`Server online! Please proceed to port ${port} for rapid assimilation.`);
