@@ -53,7 +53,7 @@ app.use('/dens', dens);
 
 
 app.get('/',(req,res,next)=>{
-    res.send(req.ip);
+    res.send(req.ips);
 });
 
 
