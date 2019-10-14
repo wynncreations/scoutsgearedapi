@@ -36,6 +36,7 @@ mongoose.connect(
 app.use(function (req, res, next) {
     var ip = req.ip.split('::')[1];
     var approvedIPs = process.env.WHITELIST.split(',')
+    console.log(ip);
     if (!approvedIPs.includes(ip)) {
         res.send(`Unauthorized request.`);
     }else{
