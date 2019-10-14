@@ -25,11 +25,24 @@ dotenv.config();
 // db
 
 mongoose.connect(
-    process.env.MONGO_CONNECTION, {
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PW}@cluster0-o2tyb.gcp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`, {
         useNewUrlParser: true,
         useFindAndModify: false
     }
 );
+
+
+//We are going to add IP filtering of all requests as a middleware.
+app.use(function (req, res, next) {
+    var ip = req.ip.split('::')[1];
+    var approvedIPs = process.env.WHITELIST.split(',')
+    if (!approvedIPs.includes(ip)) {
+        res.send(`Unauthorized request.`);
+    }else{
+        next();
+    }
+});
+
 
 
 const port = process.env.PORT || 8001;
@@ -52,9 +65,14 @@ app.use('/scout', scout);
 app.use('/dens', dens);
 
 
-app.get('/',(req,res,next)=>{
-    res.send(req.ip.split('::ffff:')[1]);
-});
+//app.get('/',(req,res,next)=>{
+  //  res.send(req.ip.split('::ffff:')[1]);
+//});
+
+
+
+
+
 
 
 // create the server
