@@ -34,7 +34,7 @@ mongoose.connect(
 
 //We are going to add IP filtering of all requests as a middleware.
 app.use(function (req, res, next) {
-    var ip = req.ip.split('::')[1];
+    var ip = req.ip.split(':')[1];
     var approvedIPs = process.env.WHITELIST.split(',')
     console.log(ip);
     if (!approvedIPs.includes(ip)) {
