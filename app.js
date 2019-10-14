@@ -34,14 +34,15 @@ mongoose.connect(
 
 //We are going to add IP filtering of all requests as a middleware.
 app.use(function (req, res, next) {
-    var ip = req.ip.split(':')[1];
+    var ips = req.ip.split(':');
     var approvedIPs = process.env.WHITELIST.split(',')
-    console.log(ip);
-    if (!approvedIPs.includes(ip)) {
-        res.send(`Unauthorized request.`);
-    }else{
-        next();
-    }
+    console.log(ips);
+    ips.forEach(ip => {
+        if (approvedIPs.includes(ip)) {
+            next();
+        }
+    });
+    res.status(403).send('Unauthorized request');
 });
 
 
