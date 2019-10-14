@@ -37,12 +37,15 @@ app.use(function (req, res, next) {
     var ips = req.ip.split(':');
     var approvedIPs = process.env.WHITELIST.split(',')
     console.log(ips);
-    ips.forEach(ip => {
+    try{
+        ips.forEach(ip => {
         if (approvedIPs.includes(ip)) {
             next();
         }
     });
-    res.status(403).send('Unauthorized request');
+    }catch{
+        res.status(403).send('Unauthorized request');
+    }
 });
 
 
