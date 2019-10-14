@@ -33,6 +33,7 @@ mongoose.connect(
 
 
 //We are going to add IP filtering of all requests as a middleware.
+//I only want access to the api for MY frontend right now.
 app.use(function (req, res, next) {
     var ips = req.ip.split(':');
     var approvedIPs = process.env.WHITELIST.split(',')
@@ -48,8 +49,6 @@ app.use(function (req, res, next) {
     }
 });
 
-
-
 const port = process.env.PORT || 8001;
 
 //routes go here
@@ -59,7 +58,8 @@ const unit = require('./routes/unit');
 const kid = require('./routes/kid');
 const dens = require('./routes/dens');
 const scout = require('./routes/scout');
-
+const item = require('./routes/item');
+const category = require('./routes/category');
 
 //plug the routes in.
 app.use('/inventory', inventory);
@@ -68,15 +68,8 @@ app.use('/unit', unit);
 app.use('/kid', kid);
 app.use('/scout', scout);
 app.use('/dens', dens);
-
-
-//app.get('/',(req,res,next)=>{
-  //  res.send(req.ip.split('::ffff:')[1]);
-//});
-
-
-
-
+app.use('/item',item);
+app.use('/category',category);
 
 
 
