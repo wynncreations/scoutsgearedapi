@@ -20,7 +20,7 @@ router.get('/',(req,res,next)=>{
             res.status(400).send(`Error -  ${err}`)
         } else {
             res.status(200).send({
-                item: foundItems
+                items: foundItems
             });
         }
     });
@@ -32,6 +32,7 @@ router.get('/category/:category',(req,res,next)=>{
         if (err) {
             res.status(400).send(`Error -  ${err}`)
         } else {
+            console.log(JSON.stringify(foundItems));
             res.status(200).send({
                 item: foundItems
             });
