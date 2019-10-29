@@ -18,7 +18,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/add', (req, res, next) => {
     var campaign = new Campaign({
         label: req.body.label,
-        unit_id: req.body.unit_id
+        unit_ID: req.body.unit_id
     });
 
     console.log(JSON.stringify(campaign));
