@@ -60,6 +60,7 @@ const dens = require('./routes/dens');
 const scout = require('./routes/scout');
 const item = require('./routes/item');
 const category = require('./routes/category');
+const campaign = require('./routes/campaign');
 
 //plug the routes in.
 app.use('/inventory', inventory);
@@ -70,7 +71,7 @@ app.use('/scout', scout);
 app.use('/dens', dens);
 app.use('/item',item);
 app.use('/category',category);
-
+app.use('/campaign', campaign);
 
 
 // create the server
