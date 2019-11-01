@@ -15,7 +15,7 @@ router.get('/:id',(req,res,next)=>{
 
 //Get all items by unit id.
 router.get('/unit/:id',(req,res,next)=>{
-    Item.find({unit_id:req.params.id},(err,foundItems)=>{
+    Item.find({unit_ID:req.params.id},(err,foundItems)=>{
         if (err) {
             res.status(400).send(`Error -  ${err}`)
         } else {
@@ -28,7 +28,7 @@ router.get('/unit/:id',(req,res,next)=>{
 
 //Get all items by a category
 router.get('/category/:category/unit/:id',(req,res,next)=>{
-    Item.find({category:category, unit_id: req.params.id},(err,foundItems)=>{
+    Item.find({category:category, unit_ID: req.params.id},(err,foundItems)=>{
         if (err) {
             res.status(400).send(`Error -  ${err}`)
         } else {
@@ -51,7 +51,7 @@ router.post('/add',(req,res,next)=>{
         factory_url : req.body.factory_url,
         image_url : req.body.image_url,
         description : req.body.description,
-        unit_id: req.body.unit_id
+        unit_ID: req.body.unit_id
     });
     item.save((err)=>{
         if(err){

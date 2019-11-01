@@ -4,7 +4,7 @@ const Campaign = require('../models/campaign');
 
 //Get all campaign
 router.get('/:id', (req, res, next) => {
-    Campaign.find({unit_id:req.params.id},(err, campaign) => {
+    Campaign.find({unit_ID:req.params.id},(err, campaign) => {
         if (err) {
             res.status(400).send(`Error - ${err}`);
         } else {

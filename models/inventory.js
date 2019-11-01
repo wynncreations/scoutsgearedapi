@@ -18,7 +18,7 @@ var InventorySchema = new Schema({
     shopDescription: String,
     condition: String,
     featured: Boolean,
-    unit_ID: {
+    unit_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Unit"
     }
