@@ -41,8 +41,6 @@ router.get('/:id/withParent', (req, res, next) => {
             if (err) {
                 res.status(500).send(`Error - ${err}`);
             } else {
-                //console.log(foundKids[0].parent.username)
-                //console.log(JSON.stringify(foundScout));
                 res.status(200).send({
                     scout: foundScout
                 })
