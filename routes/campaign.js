@@ -34,7 +34,7 @@ router.post('/add', (req, res, next) => {
 
 //Get campaign by ID
 router.get('/:id', (req, res, next) => {
-    Campaign.find({
+    Campaign.findOne({
         _id: req.params.id
     }, (err, campaign) => {
         if (err) {
