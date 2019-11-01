@@ -13,9 +13,9 @@ router.get('/:id',(req,res,next)=>{
     });
 });
 
-//Get all items.
-router.get('/',(req,res,next)=>{
-    Item.find((err,foundItems)=>{
+//Get all items by unit id.
+router.get('/unit/:id',(req,res,next)=>{
+    Item.find({unit_id:req.params.id},(err,foundItems)=>{
         if (err) {
             res.status(400).send(`Error -  ${err}`)
         } else {
@@ -27,8 +27,8 @@ router.get('/',(req,res,next)=>{
 });
 
 //Get all items by a category
-router.get('/category/:category',(req,res,next)=>{
-    Item.find({category:category},(err,foundItems)=>{
+router.get('/category/:category/unit/:id',(req,res,next)=>{
+    Item.find({category:category, unit_id: req.params.id},(err,foundItems)=>{
         if (err) {
             res.status(400).send(`Error -  ${err}`)
         } else {
@@ -50,7 +50,8 @@ router.post('/add',(req,res,next)=>{
         active_discount_value : 0.00,
         factory_url : req.body.factory_url,
         image_url : req.body.image_url,
-        description : req.body.description
+        description : req.body.description,
+        unit_id: req.body.unit_id
     });
     item.save((err)=>{
         if(err){

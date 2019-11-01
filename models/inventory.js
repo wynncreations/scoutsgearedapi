@@ -17,7 +17,11 @@ var InventorySchema = new Schema({
     factoryDescription: String,
     shopDescription: String,
     condition: String,
-    featured: Boolean
+    featured: Boolean,
+    unit_ID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Unit"
+    }
 });
 
 // Compile model from schema

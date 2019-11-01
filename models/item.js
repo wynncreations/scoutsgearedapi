@@ -29,6 +29,10 @@ var ItemSchema = new Schema({
     },
     description:{
         type: String
+    },
+    unit_ID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Unit"
     }
 
 });

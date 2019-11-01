@@ -7,6 +7,10 @@ var CategorySchema = new Schema({
         type: String,
         required: true,
         unique: true
+    },
+    unit_ID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Unit"
     }
 
 });
