@@ -2,8 +2,8 @@ const express = require('express');
 router = express.Router();
 const Campaign = require('../models/campaign');
 
-//Get all campaign
-router.get('/:id', (req, res, next) => {
+//Get all campaign by unit id
+router.get('/unit/:id', (req, res, next) => {
     Campaign.find({unit_ID:req.params.id},(err, campaign) => {
         if (err) {
             res.status(400).send(`Error - ${err}`);
@@ -32,5 +32,18 @@ router.post('/add', (req, res, next) => {
     });
 });
 
-
+//Get campaign by ID
+router.get('/:id', (req, res, next) => {
+    Campaign.find({
+        _id: req.params.id
+    }, (err, campaign) => {
+        if (err) {
+            res.status(400).send(`Error - ${err}`);
+        } else {
+            res.status(200).send({
+                campaigns: campaign
+            });
+        }
+    })
+});
 module.exports = router;
