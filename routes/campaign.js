@@ -41,7 +41,7 @@ router.get('/:id', (req, res, next) => {
             res.status(400).send(`Error - ${err}`);
         } else {
             res.status(200).send({
-                campaigns: campaign
+                campaign: campaign
             });
         }
     })
