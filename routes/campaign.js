@@ -76,5 +76,21 @@ router.post('/:id/updatescout',(req,res,next)=>{
         });
 });
 
+//pass in a campaign id and scout id and get the event doc
+router.get('/getEvent/:campaign_id/scout/:scout_id',(req,res,next)=>{
+    CampaignEvent.findOne({campaign_id:req.params.campaign_id,scout_id:req.params.scout_id},(err,doc)=>{
+        if(err){
+            res.status(500).send({
+                status:`Error`,
+                message:`Error Finding ${err}`
+            });
+        }else{
+            res.status(200).send({
+                status:`Ok`,
+                message:doc
+            });
+        }
+    });
+});
 
 module.exports = router;
