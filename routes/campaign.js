@@ -62,7 +62,7 @@ router.post('/:id/updatescout',(req,res,next)=>{
         {
             new:true,
             upsert:true
-        },(err,doc)=>{
+        },(err,updated)=>{
             if(err){
                 res.status(500).send({
                     status:`Error`,
@@ -85,7 +85,7 @@ router.post('/:id/updatescout',(req,res,next)=>{
                     }else{
                         res.status(201).send({
                         status:`Ok`,
-                        message:doc
+                        message: updated
                         });
                     }
                 });
