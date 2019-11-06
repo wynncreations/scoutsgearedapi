@@ -89,11 +89,6 @@ router.post('/:id/updatescout',(req,res,next)=>{
                         });
                     }
                 });
-                
-                res.status(201).send({
-                    status:`Ok`,
-                    message:doc
-                });
             }
         });
 });
