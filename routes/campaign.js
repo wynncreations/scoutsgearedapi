@@ -56,7 +56,7 @@ router.post('/:id/updatescout',(req,res,next)=>{
             campaign_id:req.body.campaign_id
         },
         {
-            total_raise: total_raised+=parseFloat(req.body.update_amount)
+            $inc:{total_raised:parseFloat(req.body.update_amount)}
         },
         {
             new:true,
