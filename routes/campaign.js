@@ -2,6 +2,7 @@ const express = require('express');
 router = express.Router();
 const Campaign = require('../models/campaign');
 const CampaignEvent = require('../models/campaign_event');
+const Kid = require('../models/kids');
 
 //Get all campaign by unit id
 router.get('/unit/:id', (req, res, next) => {
@@ -68,6 +69,27 @@ router.post('/:id/updatescout',(req,res,next)=>{
                     message:`Error updating ${err}`
                 });
             }else{
+                //we also now need to update the master record for the scout.
+                Kid.findOneAndUpdate({
+                    _id: req.params.scout_id
+                }, {
+                    $inc: {
+                        fundRaised:parseFloat(req.body.update_amount)
+                    }
+                },(err,doc)=>{
+                    if(err){
+                        res.status(500).send({
+                            status:`Error`,
+                            message:`Error updating ${err}`
+                        });
+                    }else{
+                        res.status(201).send({
+                        status:`Ok`,
+                        message:doc
+                        });
+                    }
+                });
+                
                 res.status(201).send({
                     status:`Ok`,
                     message:doc
@@ -80,7 +102,7 @@ router.post('/:id/updatescout',(req,res,next)=>{
 router.get('/getEvent/:campaign_id/scout/:scout_id',(req,res,next)=>{
     CampaignEvent.findOne({campaign_id:req.params.campaign_id,scout_id:req.params.scout_id},(err,doc)=>{
         if(err){
-            res.status(500).send({
+            res.status(501).send({
                 status:`Error`,
                 message:`Error Finding ${err}`
             });
@@ -92,5 +114,9 @@ router.get('/getEvent/:campaign_id/scout/:scout_id',(req,res,next)=>{
         }
     });
 });
+
+/*
+Todo: Add support to update the scouts Funds Raised amount on their primary doc whenever we make a change to a single campaign.
+*/
 
 module.exports = router;
