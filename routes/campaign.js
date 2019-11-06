@@ -71,12 +71,13 @@ router.post('/:id/updatescout',(req,res,next)=>{
             }else{
                 //we also now need to update the master record for the scout.
                 Kid.findOneAndUpdate({
-                    _id: req.params.scout_id
+                    _id: req.body.scout_id
                 }, {
                     $inc: {
                         fundRaised:parseFloat(req.body.update_amount)
                     }
                 },(err,doc)=>{
+                    console.log(JSON.stringify(doc));
                     if(err){
                         res.status(500).send({
                             status:`Error`,
