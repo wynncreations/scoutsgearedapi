@@ -1,6 +1,7 @@
 const express = require('express');
 router = express.Router();
 const Campaign = require('../models/campaign');
+const CampaignEvent = require('../models/campaign_event');
 
 //Get all campaign by unit id
 router.get('/unit/:id', (req, res, next) => {
@@ -46,4 +47,34 @@ router.get('/:id', (req, res, next) => {
         }
     })
 });
+
+
+router.post('/:id/updatescout',(req,res,next)=>{
+    CampaignEvent.findOneAndUpdate(
+        {    
+            scout_id:req.body.scout_id,
+            campaign_id:req.body.campaign_id
+        },
+        {
+            total_raise: total_raised+=parseFloat(req.body.update_amount)
+        },
+        {
+            new:true,
+            upsert:true
+        },(err,doc)=>{
+            if(err){
+                res.status(500).send({
+                    status:`Error`,
+                    message:`Error updating ${err}`
+                });
+            }else{
+                res.status(201).send({
+                    status:`Ok`,
+                    message:doc
+                });
+            }
+        });
+});
+
+
 module.exports = router;
