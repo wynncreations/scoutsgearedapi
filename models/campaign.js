@@ -10,6 +10,12 @@ var CampaignSchema = new Schema({
     },
     unit_ID:{
         type: mongoose.Schema.Types.ObjectId, ref: "Unit"
+    },
+    total_raised:
+    {
+        type:Number,
+        require:true,
+        unique:true
     }
 
 });

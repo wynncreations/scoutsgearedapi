@@ -84,10 +84,26 @@ router.post('/:id/updatescout',(req,res,next)=>{
                             message:`Error updating ${err}`
                         });
                     }else{
-                        res.status(201).send({
-                        status:`Ok`,
-                        message: updated
-                        });
+                        //We need to update the Campaign itself with the incremented total raised
+                        Campaign.findOneAndUpdate(
+                            {_id:req.body.campaign_id},
+                            {$inc:{total_raised:parseFloat(req.body.update_amount)}},
+                            (err,doc2)=>{
+                                if(err){
+                                    res.status(500).send({
+                                        status: `Error`,
+                                        message: `Error updating ${err}`
+                                    });
+                                }else{
+                                    res.status(201).send({
+                                        status: `Ok`,
+                                        message: updated
+                                    });
+                                }
+                            });
+
+
+                        
                     }
                 });
             }
