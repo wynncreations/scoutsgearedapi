@@ -28,9 +28,9 @@ router.post('/add', (req, res, next) => {
                     subUnitType: req.body.den,
                     subUnitID: req.body.den_id,
                     parent: req.body.parent,
-                    fundRaised: 1.99,
-                    profit: 1.99,
-                    scoutFund: 1.99,
+                    fundRaised: 0.00,
+                    profit: 0.00,
+                    scoutFund: 0.00,
                 });
 
                 kid.save((err)=>{

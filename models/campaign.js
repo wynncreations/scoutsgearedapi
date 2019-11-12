@@ -16,6 +16,16 @@ var CampaignSchema = new Schema({
         type:Number,
         require:true,
         unique:true
+    },
+    profit_margin:{
+        type:Number,
+        require:true,
+        unique:true
+    },
+    profit:{
+        type:Number,
+        required:true,
+        unique:true
     }
 
 });
