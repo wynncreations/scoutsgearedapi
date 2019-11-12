@@ -95,15 +95,36 @@ router.post('/:id/updatescout',(req,res,next)=>{
                                         message: `Error updating ${err}`
                                     });
                                 }else{
-                                    res.status(201).send({
-                                        status: `Ok`,
-                                        message: updated
+                                    //successfully updated total raised, lets use that doc to make another update.
+                                    var foundDoc = doc.JSON();
+                                    var calcProfit = parseFloat(req.body.total_raised)*foundDoc.profit_margin;
+
+
+                                    Campaign.findOneAndUpdate({_id:req.body.campaign_id},{$inc:{profit:calcProfit}},(err,doc3)=>{
+                                        if(err){
+                                            res.status(500).send({
+                                                status:`Error`,
+                                                message:`Error updating ${err}`
+                                            });
+                                        }else{
+                                            //okay now update the scouts profit value
+                                            Kid.findOneAndUpdate({_id:req.body.scout_id},{$inc:{profit:calcProfit}},(err,doc4)=>{
+                                                if(err){
+                                                    res.status(500).send({
+                                                        status:`Error`,
+                                                        message:`Error updating ${err}`
+                                                    });
+                                                }else{
+                                                    res.status(201).send({
+                                                        status: `Ok`,
+                                                        message: updated
+                                                    });
+                                                }
+                                            });
+                                        }
                                     });
                                 }
-                            });
-
-
-                        
+                            }); 
                     }
                 });
             }
