@@ -145,7 +145,7 @@ router.get('/scout/parent/:parent_id', (req, res, next) => {
                 //console.log(foundKids[0].parent.username)
                 console.log(JSON.stringify(foundKids));
                 res.status(200).send({
-                    scout: foundKids
+                    scouts: foundKids
                 })
             }
         })
