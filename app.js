@@ -61,7 +61,7 @@ const scout = require('./routes/scout');
 const item = require('./routes/item');
 const category = require('./routes/category');
 const campaign = require('./routes/campaign');
-
+const email = require('./routes/email');
 //plug the routes in.
 app.use('/inventory', inventory);
 app.use('/auth', auth);
@@ -72,6 +72,10 @@ app.use('/dens', dens);
 app.use('/item',item);
 app.use('/category',category);
 app.use('/campaign', campaign);
+app.use('/email', email);
+
+
+
 
 
 // create the server
