@@ -6,6 +6,7 @@ var CampaignEventSchema = new Schema({
     scout_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Kid"
+
     },
     campaign_id: {
         type: mongoose.Schema.Types.ObjectId,
