@@ -62,6 +62,7 @@ const item = require('./routes/item');
 const category = require('./routes/category');
 const campaign = require('./routes/campaign');
 const email = require('./routes/email');
+const store = require('./routes/store');
 //plug the routes in.
 app.use('/inventory', inventory);
 app.use('/auth', auth);
@@ -73,7 +74,7 @@ app.use('/item',item);
 app.use('/category',category);
 app.use('/campaign', campaign);
 app.use('/email', email);
-
+app.use('/store',store);
 
 
 
