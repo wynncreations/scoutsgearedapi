@@ -45,6 +45,7 @@ router.get('/:id', (req, res, next) => {
             res.status(200).send({
                 campaign: campaign
             });
+   
         }
     })
 });
