@@ -33,7 +33,7 @@ router.post('/purchase',(req,res,next)=>{
     /*User.find({account_type:"Admin"},(err,doc)=>{
         admins = doc.json();
     });*/
-
+/*
     console.log(item);
         
     const msg = {
@@ -45,7 +45,7 @@ router.post('/purchase',(req,res,next)=>{
         html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`,
     };
     sgMail.send(msg);
-
+*/
 
 /*
     //update scout fund total
