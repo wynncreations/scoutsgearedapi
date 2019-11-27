@@ -34,19 +34,24 @@ router.post('/purchase',(req,res,next)=>{
 
     console.log(item);
 
+    try{
+        //send email to parent
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-    //send email to parent
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        const msg = {
+            to: req.body.parent_email,
+            cc: 'robert+scoutsgearedadmin@gmail.com', //Admin account
+            from: 'robert@wynnoutfitters.com',
+            subject: `Purchase of ${item.name} Confirmation`,
+            text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
+            html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`,
+        };
+        sgMail.send(msg);
 
-    const msg = {
-        to: req.body.parent_email,
-        cc: 'robert+scoutsgearedadmin@gmail.com',//Admin account
-        from: 'robert@wynnoutfitters.com',
-        subject: `Purchase of ${item.name} Confirmation`,
-        text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
-        html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`,
-    };
-    sgMail.send(msg);
+    }catch(err){
+        
+    }
+
 
     //update scout fund total
     User.findByIdAndUpdate({_id:req.body.scout_id},{$inc:{total_raised:(parseFloat(req.body.retail_cost)*-1)}},(err,doc)=>{
