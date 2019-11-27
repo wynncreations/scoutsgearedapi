@@ -25,12 +25,14 @@ router.post('/purchase',(req,res,next)=>{
     var admins;
 
     Item.findById({_id:req.body.item_id},(err,doc)=>{
-        item = JSON.stringify(doc);
+        item = doc.json();
     });
 
     User.find({account_type:"Admin"},(err,doc)=>{
-        admins = JSON.stringify(doc);
+        admins = doc.json();
     });
+
+    console.log(item);
 
 
     //send email to parent
