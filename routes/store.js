@@ -24,15 +24,15 @@ router.post('/purchase',(req,res,next)=>{
     
     //Lets get some data
     var item;
-    var admins;
+    //var admins;
 
     Item.findById({_id:req.body.item_id},(err,doc)=>{
         item = doc.json();
     });
 
-    User.find({account_type:"Admin"},(err,doc)=>{
+    /*User.find({account_type:"Admin"},(err,doc)=>{
         admins = doc.json();
-    });
+    });*/
 
     console.log(item);
         
@@ -47,10 +47,15 @@ router.post('/purchase',(req,res,next)=>{
     sgMail.send(msg);
 
 
-
+/*
     //update scout fund total
     User.findByIdAndUpdate({_id:req.body.scout_id},{$inc:{total_raised:(parseFloat(req.body.retail_cost)*-1)}},(err,doc)=>{
         res.status(200).send({message:`Successfully logged event ${req.body}`});
+    });
+    */
+
+    res.status(200).send({
+        message: `Successfully logged event`
     });
 });
 
