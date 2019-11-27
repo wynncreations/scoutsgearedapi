@@ -40,8 +40,8 @@ router.post('/purchase',(req,res,next)=>{
         
             const msg = {
                 to: req.body.parent_email,
-                cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
-                from: 'robert@wynnoutfitters.com',
+                //cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
+                from: 'admin@scoutsgeared.com',
                 subject: `Purchase of ${doc.name} Confirmation`,
                 text: `Congratulations, ${scout.firstname} ${scout.lastname} has reserved  ${doc.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
                 html: `<strong>Congratulations, ${scout.firstname} ${scout.lastname} has reserved  ${doc.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`

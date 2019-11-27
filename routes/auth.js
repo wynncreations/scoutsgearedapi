@@ -46,8 +46,8 @@ router.post('/register',(req,res,next)=>{
 
                             const msg = {
                                 to: req.body.username,
-                                cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
-                                from: 'robert@wynnoutfitters.com',
+                                //cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
+                                from: 'admin@scoutsgeared.com',
                                 templateId: 'd-5c02efff7f414146b391b578900eff73',
                                     dynamic_template_data: {
                                         subject: `Welcome to ScoutsGeared!`,
