@@ -6,7 +6,7 @@ const Kid = require('../models/kids');
 const User = require('../models/users');
 const sgMail = require('@sendgrid/mail');
 
- sgMail.setApiKey('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');
+ sgMail.setApiKey(process.env.EMAIL_KEY);
 
 
 router.post('/purchase',(req,res,next)=>{
