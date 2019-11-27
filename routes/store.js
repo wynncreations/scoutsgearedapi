@@ -41,7 +41,7 @@ router.post('/purchase',(req,res,next)=>{
         if(err){res.status('502').send(err)}
         
         const msg = {
-            to: req.body.username,
+            to: req.body.parent_email,
             //cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
             from: 'admin@scoutsgeared.com',
             templateId: 'd-cf4858298dbd4229992a61aa32e682c2',
