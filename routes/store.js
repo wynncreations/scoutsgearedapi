@@ -35,7 +35,7 @@ router.post('/purchase',(req,res,next)=>{
     });
     
 
-    
+
     //var admins;
     Item.findOne({_id:req.body.item_id},(err,doc)=>{
         if(err){res.status('502').send(err)}
@@ -47,7 +47,7 @@ router.post('/purchase',(req,res,next)=>{
             templateId: 'd-cf4858298dbd4229992a61aa32e682c2',
                 dynamic_template_data: {
                     subject: `Thank you for your purchase!`,
-                    itemname: req.body.doc.name
+                    itemname: doc.name
                 },
         };
         const status = sgMail.send(msg);
