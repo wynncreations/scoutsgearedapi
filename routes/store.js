@@ -3,7 +3,7 @@ const router = express.Router();
 const StoreEvent = require("../models/store_event");
 const Item = require('../models/item');
 const User = require('../models/users');
-
+const sgMail = require('@sendgrid/mail');
 
 router.post('/purchase',(req,res,next)=>{
     //we need to log the store event
