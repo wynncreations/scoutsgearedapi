@@ -33,8 +33,8 @@ router.post('/purchase',(req,res,next)=>{
     /*User.find({account_type:"Admin"},(err,doc)=>{
         admins = doc.json();
     });*/
-/*
-    console.log(item);
+
+    //console.log(item);
         
     const msg = {
         to: req.body.parent_email,
@@ -42,10 +42,10 @@ router.post('/purchase',(req,res,next)=>{
         from: 'robert@wynnoutfitters.com',
         subject: `Purchase of ${item.name} Confirmation`,
         text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
-        html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`,
+        html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`
     };
     sgMail.send(msg);
-*/
+
 
 /*
     //update scout fund total
