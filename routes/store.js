@@ -4,6 +4,8 @@ const StoreEvent = require("../models/store_event");
 const Item = require('../models/item');
 const User = require('../models/users');
 const sgMail = require('@sendgrid/mail');
+ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 
 router.post('/purchase',(req,res,next)=>{
     //we need to log the store event
@@ -33,24 +35,17 @@ router.post('/purchase',(req,res,next)=>{
     });
 
     console.log(item);
-
-    try{
-        //send email to parent
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-        const msg = {
-            to: req.body.parent_email,
-            cc: 'robert+scoutsgearedadmin@gmail.com', //Admin account
-            from: 'robert@wynnoutfitters.com',
-            subject: `Purchase of ${item.name} Confirmation`,
-            text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
-            html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`,
-        };
-        sgMail.send(msg);
-
-    }catch(err){
         
-    }
+    const msg = {
+        to: req.body.parent_email,
+        cc: 'robert+scoutsgearedadmin@gmail.com', //Admin account
+        from: 'robert@wynnoutfitters.com',
+        subject: `Purchase of ${item.name} Confirmation`,
+        text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
+        html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`,
+    };
+    sgMail.send(msg);
+
 
 
     //update scout fund total
