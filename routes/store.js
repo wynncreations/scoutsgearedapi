@@ -34,18 +34,22 @@ router.post('/purchase',(req,res,next)=>{
         scout = kid
     });
     
+
+    
     //var admins;
     Item.findOne({_id:req.body.item_id},(err,doc)=>{
         if(err){res.status('502').send(err)}
         
-            const msg = {
-                to: req.body.parent_email,
-                //cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
-                from: 'admin@scoutsgeared.com',
-                subject: `Purchase of ${doc.name} Confirmation`,
-                text: `Congratulations, ${scout.firstname} ${scout.lastname} has reserved  ${doc.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
-                html: `<strong>Congratulations, ${scout.firstname} ${scout.lastname} has reserved  ${doc.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`
-            };
+        const msg = {
+            to: req.body.username,
+            //cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
+            from: 'admin@scoutsgeared.com',
+            templateId: 'd-cf4858298dbd4229992a61aa32e682c2',
+                dynamic_template_data: {
+                    subject: `Thank you for your purchase!`,
+                    itemname: req.body.doc.name
+                },
+        };
         const status = sgMail.send(msg);
         
             console.log((parseFloat(req.body.retail_cost) * -1))
