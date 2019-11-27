@@ -25,7 +25,7 @@ router.post('/purchase',(req,res,next)=>{
 
     //var admins;
     Item.findById({_id:req.body.item_id},(err,doc)=>{
-        var item = doc.json();
+        var item = doc
     
     
             const msg = {
