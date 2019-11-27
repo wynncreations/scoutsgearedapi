@@ -37,7 +37,7 @@ router.post('/purchase',(req,res,next)=>{
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
     const msg = {
-        to: parent_email,
+        to: req.body.parent_email,
         cc: 'robert+scoutsgearedadmin@gmail.com',//Admin account
         from: 'robert@wynnoutfitters.com',
         subject: `Purchase of ${item.name} Confirmation`,
