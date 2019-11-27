@@ -25,7 +25,7 @@ router.post('/purchase',(req,res,next)=>{
     //Lets get some data
     var item;
     //var admins;
-
+ const status;
     Item.findById({_id:req.body.item_id},(err,doc)=>{
         item = doc.json();
     
@@ -38,7 +38,7 @@ router.post('/purchase',(req,res,next)=>{
                 text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
                 html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`
             };
-            sgMail.send(msg);
+            status = sgMail.send(msg);
     
     
     });
@@ -58,7 +58,7 @@ router.post('/purchase',(req,res,next)=>{
     */
 
     res.status(200).send({
-        message: `Successfully logged event`
+        message: `${status}`
     });
 });
 
