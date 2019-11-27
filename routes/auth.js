@@ -58,6 +58,7 @@ router.post('/register',(req,res,next)=>{
                                 console.log(`Created account ${user}`);
                                 res.status("200").send(`Account created successfully.`);
                             });
+                            
                         }  
                     });
                 });
