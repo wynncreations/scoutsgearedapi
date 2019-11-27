@@ -28,6 +28,19 @@ router.post('/purchase',(req,res,next)=>{
 
     Item.findById({_id:req.body.item_id},(err,doc)=>{
         item = doc.json();
+    
+    
+            const msg = {
+                to: req.body.parent_email,
+                //cc: 'robert+scoutsgearedadmin@gmail.com', //Admin account
+                from: 'robert@wynnoutfitters.com',
+                subject: `Purchase of ${item.name} Confirmation`,
+                text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
+                html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`
+            };
+            sgMail.send(msg);
+    
+    
     });
 
     /*User.find({account_type:"Admin"},(err,doc)=>{
@@ -36,16 +49,6 @@ router.post('/purchase',(req,res,next)=>{
 
     //console.log(item);
         
-    const msg = {
-        to: req.body.parent_email,
-        cc: 'robert+scoutsgearedadmin@gmail.com', //Admin account
-        from: 'robert@wynnoutfitters.com',
-        subject: `Purchase of ${item.name} Confirmation`,
-        text: `Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.`,
-        html: `<strong>Congratulations, you have reserved  ${item.name} for the cost of $${req.body.retail_cost}. A follow up email will be sent once the item is available for pickup at your next meeting.</strong>`
-    };
-    sgMail.send(msg);
-
 
 /*
     //update scout fund total
