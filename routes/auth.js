@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
+const sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(process.env.EMAIL_KEY);
 
 router.post('/register',(req,res,next)=>{
     var password = req.body.password;
@@ -39,8 +42,22 @@ router.post('/register',(req,res,next)=>{
                         if(err){
                             res.status("400").send(`Error saving user - ${err}`);
                         }else{
-                            console.log(`Created account ${user}`);
-                            res.status("200").send(`Account created successfully.`);
+
+
+                            const msg = {
+                                to: req.body.username,
+                                cc: 'robert+scoutsgearedadmin@wynnoutfitters.com', //Admin account
+                                from: 'robert@wynnoutfitters.com',
+                                templateId: 'd-5c02efff7f414146b391b578900eff73',
+                                    dynamic_template_data: {
+                                        subject: `Welcome to ScoutsGeared!`,
+                                        firstname: req.body.firstname
+                                    },
+                            };
+                            const status = sgMail.send(msg,()=>{
+                                console.log(`Created account ${user}`);
+                                res.status("200").send(`Account created successfully.`);
+                            });
                         }  
                     });
                 });
